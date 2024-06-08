@@ -3,10 +3,15 @@ import { createFakeContact } from '../utils/createFakeContact.js';
 import fs from 'fs/promises';
 
 export const addOneContact = async () => {
-    const data = await fs.readFile(PATH_DB, 'utf-8');
-    const parseData = JSON.parse(data);
-    parseData.push(createFakeContact());
-    await fs.writeFile(PATH_DB, JSON.stringify(parseData));
+    try {
+        const data = await fs.readFile(PATH_DB, 'utf-8');
+        const parseData = JSON.parse(data);
+        parseData.push(createFakeContact());
+        await fs.writeFile(PATH_DB, JSON.stringify(parseData));
+    }
+    catch (error) {
+        console.error('Error')
+    }
 };
 
 await addOneContact();
