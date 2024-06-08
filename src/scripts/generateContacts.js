@@ -4,12 +4,11 @@ import fs from 'fs/promises';
 
 const generateContacts = async (number) => {
     try {
-        let data = await fs.readFile(PATH_DB, 'utf-8');
-        const parseData = JSON.parse(data);
+        const data = JSON.parse(await fs.readFile(PATH_DB, 'utf-8'));
         for (let i = 0; i < number; i++) {
-            parseData.push(createFakeContact());
+            data.push(createFakeContact());
         }
-        await fs.writeFile(PATH_DB, JSON.stringify(parseData));
+        await fs.writeFile(PATH_DB, JSON.stringify(data));
     }
     catch (error) {
         console.error('Error')

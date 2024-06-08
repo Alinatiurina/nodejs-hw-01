@@ -3,9 +3,8 @@ import fs from 'fs/promises';
 
 export const countContacts = async () => {
     try {
-        const data = await fs.readFile(PATH_DB, 'utf-8');
-        const parseData = JSON.parse(data);
-        return parseData.length;
+        const data = JSON.parse(await fs.readFile(PATH_DB, 'utf-8'));
+        return data.length;
     }
     catch (error) {
         console.error('Error')
